@@ -35,21 +35,21 @@ const (
 )
 
 type NewSessionOpts struct {
-	sessionName string
-	sessionPath string
+	SessionName string
+	SessionPath string
 }
 
 // NewSession creates a new session with provided name string and SessionType.
 func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...NewSessionOpts) *SessionName {
 	var sessionFileName string
 	var sessionPath string
-	if len(newSessionOpts) > 0 && newSessionOpts[0].sessionName != "" {
-		if newSessionOpts[0].sessionPath == "" {
+	if len(newSessionOpts) > 0 && newSessionOpts[0].SessionName != "" {
+		if newSessionOpts[0].SessionPath == "" {
 			sessionPath = "./sessions"
 		} else {
-			sessionPath = newSessionOpts[0].sessionPath
+			sessionPath = newSessionOpts[0].SessionPath
 		}
-		sessionFileName = newSessionOpts[0].sessionName
+		sessionFileName = newSessionOpts[0].SessionName
 	} else {
 		sessionFileName = fmt.Sprintf("%s.session", "telegram")
 		sessionPath = "./sessions"

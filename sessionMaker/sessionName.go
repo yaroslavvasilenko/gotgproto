@@ -12,6 +12,8 @@ import (
 // SessionName object consists of name and SessionType.
 type SessionName struct {
 	name        string
+	fileName    string
+	path        string
 	sessionType SessionType
 	data        []byte
 	err         error
@@ -32,10 +34,30 @@ const (
 	PyrogramSession
 )
 
+type newSessionOpts struct {
+	sessionName string
+	sessionPath string
+}
+
 // NewSession creates a new session with provided name string and SessionType.
-func NewSession(sessionName string, sessionType SessionType) *SessionName {
+func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...newSessionOpts) *SessionName {
+	var sessionFileName string
+	var sessionPath string
+	if len(newSessionOpts) > 0 && newSessionOpts[0].sessionName != "" {
+		if newSessionOpts[0].sessionPath == "" {
+			sessionPath = "./sessions"
+		} else {
+			sessionPath = newSessionOpts[0].sessionPath
+		}
+		sessionFileName = newSessionOpts[0].sessionName
+	} else {
+		sessionFileName = fmt.Sprintf("%s.session", "telegram")
+		sessionPath = "./sessions"
+	}
 	s := SessionName{
 		name:        sessionName,
+		fileName:    sessionFileName,
+		path:        sessionPath,
 		sessionType: sessionType,
 	}
 	s.data, s.err = s.load()
@@ -43,9 +65,12 @@ func NewSession(sessionName string, sessionType SessionType) *SessionName {
 }
 
 func (s *SessionName) load() ([]byte, error) {
+
+	fileName := fmt.Sprintf("%s/%s.session", s.path, s.name)
+
 	switch s.sessionType {
 	case PyrogramSession:
-		storage.Load("pyrogram.session", false)
+		storage.Load(fileName, false)
 		sd, err := DecodePyrogramSession(s.name)
 		if err != nil {
 			return nil, err
@@ -56,7 +81,7 @@ func (s *SessionName) load() ([]byte, error) {
 		})
 		return data, err
 	case TelethonSession:
-		storage.Load("telethon.session", false)
+		storage.Load(fileName, false)
 		sd, err := session.TelethonSession(s.name)
 		if err != nil {
 			return nil, err
@@ -67,7 +92,7 @@ func (s *SessionName) load() ([]byte, error) {
 		})
 		return data, err
 	case StringSession:
-		storage.Load("gotgproto.session", false)
+		storage.Load(fileName, false)
 		sd, err := functions.DecodeStringToSession(s.name)
 		if err != nil {
 			return nil, err
@@ -82,7 +107,7 @@ func (s *SessionName) load() ([]byte, error) {
 		if s.name == "" {
 			s.name = "new"
 		}
-		storage.Load(fmt.Sprintf("%s.session", s.name), false)
+		storage.Load(fileName, false)
 		sFD := storage.GetSession()
 		return sFD.Data, nil
 	}

@@ -34,13 +34,13 @@ const (
 	PyrogramSession
 )
 
-type newSessionOpts struct {
+type NewSessionOpts struct {
 	sessionName string
 	sessionPath string
 }
 
 // NewSession creates a new session with provided name string and SessionType.
-func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...newSessionOpts) *SessionName {
+func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...NewSessionOpts) *SessionName {
 	var sessionFileName string
 	var sessionPath string
 	if len(newSessionOpts) > 0 && newSessionOpts[0].sessionName != "" {

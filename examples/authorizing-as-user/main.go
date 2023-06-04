@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/anonyindian/gotgproto"
-	"github.com/anonyindian/gotgproto/sessionMaker"
+	"github.com/jaskaur18/gotgproto"
+	"github.com/jaskaur18/gotgproto/sessionMaker"
 )
 
 func main() {

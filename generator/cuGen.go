@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/anonyindian/gotgproto/generator/parser"
+	"github.com/jaskaur18/gotgproto/generator/parser"
 )
 
 var helperFuncsCUTempl = template.Must(template.New("cuHelpers").Parse(helperFuncsCU))
@@ -108,9 +108,9 @@ const predefinedCU = `
 package generic
 
 import (
-	"github.com/anonyindian/gotgproto/ext"
-	"github.com/anonyindian/gotgproto/types"
-	"github.com/anonyindian/gotgproto/storage"
+	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/jaskaur18/gotgproto/types"
+	"github.com/jaskaur18/gotgproto/storage"
 	"github.com/gotd/td/tg"
 )
 

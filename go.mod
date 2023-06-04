@@ -1,4 +1,4 @@
-module github.com/anonyindian/gotgproto
+module github.com/jaskaur18/gotgproto
 
 go 1.20
 

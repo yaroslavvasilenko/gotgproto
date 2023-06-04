@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/anonyindian/gotgproto"
-	"github.com/anonyindian/gotgproto/dispatcher"
-	"github.com/anonyindian/gotgproto/dispatcher/handlers"
-	"github.com/anonyindian/gotgproto/dispatcher/handlers/filters"
-	"github.com/anonyindian/gotgproto/ext"
-	"github.com/anonyindian/gotgproto/sessionMaker"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto"
+	"github.com/jaskaur18/gotgproto/dispatcher"
+	"github.com/jaskaur18/gotgproto/dispatcher/handlers"
+	"github.com/jaskaur18/gotgproto/dispatcher/handlers/filters"
+	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/jaskaur18/gotgproto/sessionMaker"
 )
 
 func main() {

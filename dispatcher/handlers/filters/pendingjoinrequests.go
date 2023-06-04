@@ -1,8 +1,8 @@
 package filters
 
 import (
-	"github.com/anonyindian/gotgproto/functions"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/functions"
 )
 
 type pendingJoinRequests struct{}

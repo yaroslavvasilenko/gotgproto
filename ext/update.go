@@ -5,10 +5,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/anonyindian/gotgproto/storage"
-	"github.com/anonyindian/gotgproto/types"
 	"github.com/gotd/td/telegram/message"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/storage"
+	"github.com/jaskaur18/gotgproto/types"
 )
 
 // Update contains all the data related to an update.

@@ -1,9 +1,9 @@
 package filters
 
 import (
-	"github.com/anonyindian/gotgproto/ext"
-	"github.com/anonyindian/gotgproto/types"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/jaskaur18/gotgproto/types"
 )
 
 var (

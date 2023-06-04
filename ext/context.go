@@ -8,14 +8,14 @@ import (
 	"strings"
 	"time"
 
-	mtp_errors "github.com/anonyindian/gotgproto/errors"
-	"github.com/anonyindian/gotgproto/functions"
-	"github.com/anonyindian/gotgproto/storage"
-	"github.com/anonyindian/gotgproto/types"
 	"github.com/gotd/td/telegram/message"
 	"github.com/gotd/td/telegram/message/entity"
 	"github.com/gotd/td/telegram/message/styling"
 	"github.com/gotd/td/tg"
+	mtp_errors "github.com/jaskaur18/gotgproto/errors"
+	"github.com/jaskaur18/gotgproto/functions"
+	"github.com/jaskaur18/gotgproto/storage"
+	"github.com/jaskaur18/gotgproto/types"
 )
 
 // Context consists of context.Context, tg.Client, Self etc.

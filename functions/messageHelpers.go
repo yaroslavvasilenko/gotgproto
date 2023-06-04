@@ -3,9 +3,9 @@ package functions
 import (
 	"context"
 
-	"github.com/anonyindian/gotgproto/errors"
-	"github.com/anonyindian/gotgproto/storage"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/errors"
+	"github.com/jaskaur18/gotgproto/storage"
 )
 
 func GetMessages(ctx context.Context, raw *tg.Client, chatId int64, mids []tg.InputMessageClass) (tg.MessageClassArray, error) {

@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/anonyindian/gotgproto/functions"
-	"github.com/anonyindian/gotgproto/storage"
 	"github.com/gotd/td/session"
+	"github.com/jaskaur18/gotgproto/functions"
+	"github.com/jaskaur18/gotgproto/storage"
 )
 
 // SessionName object consists of name and SessionType.

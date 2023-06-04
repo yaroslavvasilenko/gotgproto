@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/anonyindian/gotgproto/storage"
 	"github.com/go-faster/errors"
 	"github.com/gotd/td/session"
+	"github.com/jaskaur18/gotgproto/storage"
 )
 
 // SessionStorage implements SessionStorage for file system as file

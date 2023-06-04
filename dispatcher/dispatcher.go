@@ -7,11 +7,11 @@ import (
 	"log"
 	"runtime/debug"
 
-	"github.com/anonyindian/gotgproto/ext"
-	"github.com/anonyindian/gotgproto/storage"
 	"github.com/gotd/td/telegram"
 	"github.com/gotd/td/telegram/message"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/jaskaur18/gotgproto/storage"
 	"go.uber.org/multierr"
 )
 

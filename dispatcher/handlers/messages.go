@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/anonyindian/gotgproto/dispatcher/handlers/filters"
-	"github.com/anonyindian/gotgproto/ext"
+	"github.com/jaskaur18/gotgproto/dispatcher/handlers/filters"
+	"github.com/jaskaur18/gotgproto/ext"
 )
 
 // Message handler is executed when the update consists of tg.Message with provided conditions.

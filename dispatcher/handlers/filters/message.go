@@ -3,9 +3,9 @@ package filters
 import (
 	"regexp"
 
-	"github.com/anonyindian/gotgproto/functions"
-	"github.com/anonyindian/gotgproto/types"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/functions"
+	"github.com/jaskaur18/gotgproto/types"
 )
 
 type messageFilters struct{}

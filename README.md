@@ -15,7 +15,7 @@ You can use this package to create bots and userbots with Telegram MTProto easil
 You can download the library with the help of standard `go get` command.
 
 ```bash
-go get github.com/anonyindian/gotgproto
+go get github.com/jaskaur18/gotgproto
 ```
 
 ## Usage

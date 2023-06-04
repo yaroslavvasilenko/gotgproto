@@ -3,9 +3,9 @@ package types
 import (
 	"context"
 
-	"github.com/anonyindian/gotgproto/errors"
-	"github.com/anonyindian/gotgproto/functions"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/errors"
+	"github.com/jaskaur18/gotgproto/functions"
 )
 
 type Message struct {

@@ -3,8 +3,8 @@ package functions
 import (
 	"context"
 
-	"github.com/anonyindian/gotgproto/storage"
 	"github.com/gotd/td/tg"
+	"github.com/jaskaur18/gotgproto/storage"
 )
 
 func AddChatMembers(context context.Context, client *tg.Client, chatPeer tg.InputPeerClass, users []tg.InputUserClass, forwardLimit int) (bool, error) {

@@ -67,7 +67,7 @@ func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...N
 
 func (s *SessionName) load() ([]byte, error) {
 
-	fileName := fmt.Sprintf("%s/%s.session", s.path, s.name)
+	fileName := fmt.Sprintf("%s/%s.session", s.path, s.fileName)
 
 	switch s.sessionType {
 	case PyrogramSession:

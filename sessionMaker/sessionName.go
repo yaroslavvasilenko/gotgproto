@@ -52,7 +52,7 @@ func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...N
 		}
 		sessionFileName = newSessionOpts[0].SessionName
 	} else {
-		sessionFileName = fmt.Sprintf("%s.session", "telegram")
+		sessionFileName = fmt.Sprintf("%s_%s", sessionName, "telegram")
 		sessionPath = "./sessions"
 	}
 	s := SessionName{

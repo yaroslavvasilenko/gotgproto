@@ -113,6 +113,7 @@ func NewClient(appId int, apiHash string, cType ClientType, opts *ClientOpts) (*
 		opts = &ClientOpts{
 			SystemLangCode: "en",
 			ClientLangCode: "en",
+			//Resolver:       dcs.PlainResolver{},
 		}
 	}
 

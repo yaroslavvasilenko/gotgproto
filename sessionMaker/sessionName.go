@@ -99,7 +99,7 @@ func (s *SessionName) load() ([]byte, error) {
 		return data, err
 	case TDataSession:
 		storage.Load(fileName, false)
-		accounts, err := tdesktop.Read(s.path, nil)
+		accounts, err := tdesktop.Read(s.name, nil)
 		if err != nil {
 			return nil, err
 		}

@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/gotd/td/session"
+	"github.com/gotd/td/session/tdesktop"
 	"github.com/jaskaur18/gotgproto/functions"
 	"github.com/jaskaur18/gotgproto/storage"
 )
@@ -32,6 +33,8 @@ const (
 	TelethonSession
 	// PyrogramSession is used as SessionType when you want to log in through the string session made by pyrogram - a Python MTProto library.
 	PyrogramSession
+	// TDataSession is used as SessionType when you want to log in through the string session made by Telegram Client - a C++ MTProto library.
+	TDataSession
 )
 
 // NewSessionOpts is the options for creating a new session.
@@ -92,6 +95,28 @@ func (s *SessionName) load() ([]byte, error) {
 			Data:    *sd,
 		})
 		return data, err
+	case TDataSession:
+		storage.Load(fileName, false)
+		accounts, err := tdesktop.Read(s.path, nil)
+		if err != nil {
+			return nil, err
+		}
+		if len(accounts) == 0 {
+			return nil, fmt.Errorf("no accounts found")
+		}
+		auth := accounts[0]
+		sd, err := session.TDesktopSession(auth)
+		if err != nil {
+			return nil, err
+		}
+
+		data, err := json.Marshal(jsonData{
+			Version: storage.LatestVersion,
+			Data:    *sd,
+		})
+
+		return data, err
+
 	case StringSession:
 		storage.Load(fileName, false)
 		sd, err := functions.DecodeStringToSession(s.name)

@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/gotd/td/tg"
-	"github.com/jaskaur18/gotgproto/errors"
 	"github.com/jaskaur18/gotgproto/functions"
 )
 
@@ -66,10 +65,12 @@ func constructMessageFromMessageService(m *tg.MessageService) *Message {
 }
 
 func (m *Message) SetRepliedToMessage(ctx context.Context, raw *tg.Client) error {
-	replyTo := m.ReplyTo.ReplyToMsgID
-	if replyTo == 0 {
-		return errors.ErrMessageNotExist
-	}
+
+	replyTo := 0
+	//	 m.ReplyTo.ReplyToMsgID
+	//if replyTo == 0 {
+	//	return errors.ErrMessageNotExist
+	//}
 	chatId := functions.GetChatIdFromPeer(m.PeerID)
 	msgs, err := functions.GetMessages(ctx, raw, chatId, []tg.InputMessageClass{
 		&tg.InputMessageID{

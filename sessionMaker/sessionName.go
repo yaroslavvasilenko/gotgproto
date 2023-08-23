@@ -3,8 +3,8 @@ package sessionMaker
 import (
 	"encoding/json"
 	"fmt"
-	"log/slog"
 	"os"
+	"path/filepath"
 
 	"github.com/gotd/td/session"
 	"github.com/gotd/td/session/tdesktop"
@@ -14,16 +14,15 @@ import (
 
 // SessionName object consists of name and SessionType.
 type SessionName struct {
-	name        string
-	fileName    string
-	path        string
-	sessionType SessionType
-	data        []byte
-	err         error
+	Name        string
+	FileName    string
+	Path        string
+	SessionType SessionType
+	Data        []byte
+	Err         error
 }
 
 // SessionType is the type of session you want to log in through.
-// It consists of three types: Session, StringSession, TelethonSession.
 type SessionType int
 
 const (
@@ -63,74 +62,47 @@ func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...N
 		sessionPath = "./sessions"
 	}
 	s := SessionName{
-		name:        sessionName,
-		fileName:    sessionFileName,
-		path:        sessionPath,
-		sessionType: sessionType,
+		Name:        sessionName,
+		FileName:    sessionFileName,
+		Path:        sessionPath,
+		SessionType: sessionType,
 	}
-	s.data, s.err = s.load()
+	s.Data, s.Err = s.OptimizeSessionData()
 	return &s
 }
 
-func (s *SessionName) load() ([]byte, error) {
-	defer func() {
-		if r := recover(); r != nil {
-			slog.Info("failed to load session", r)
-			s.err = fmt.Errorf("failed to load session: %v", r)
-		}
-	}()
+// GetName is used for retrieving the name of the session.
+func (s *SessionName) GetName() string {
+	return s.Name
+}
 
-	fileName := fmt.Sprintf("%s/%s.session", s.path, s.fileName)
+// GetData is used for retrieving session data.
+func (s *SessionName) GetData() ([]byte, error) {
+	return s.Data, s.Err
+}
 
-	// Check if the file exists
-	_, err := os.Stat(fileName)
-	if err != nil {
-		if os.IsNotExist(err) {
-			// Create an empty file if it doesn't exist
-			file, createErr := os.Create(fileName)
-			if createErr != nil {
-				return nil, createErr
+// OptimizeSessionData optimizes session data based on the session type.
+func (s *SessionName) OptimizeSessionData() ([]byte, error) {
+	switch s.SessionType {
+	case PyrogramSession, TelethonSession, TDataSession:
+		storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+
+		var sd *session.Data
+		var err error
+
+		switch s.SessionType {
+		case PyrogramSession:
+			sd, err = DecodePyrogramSession(s.Name)
+		case TelethonSession:
+			sd, err = session.TelethonSession(s.Name)
+		case TDataSession:
+			accounts, err := tdesktop.Read(s.Name, nil)
+			if err == nil && len(accounts) > 0 {
+				auth := accounts[0]
+				sd, err = session.TDesktopSession(auth)
 			}
-			defer file.Close() // Close the file when done
-		} else {
-			return nil, err
 		}
-	}
 
-	switch s.sessionType {
-	case PyrogramSession:
-		storage.Load(fileName, false)
-		sd, err := DecodePyrogramSession(s.name)
-		if err != nil {
-			return nil, err
-		}
-		data, err := json.Marshal(jsonData{
-			Version: storage.LatestVersion,
-			Data:    *sd,
-		})
-		return data, err
-	case TelethonSession:
-		storage.Load(fileName, false)
-		sd, err := session.TelethonSession(s.name)
-		if err != nil {
-			return nil, err
-		}
-		data, err := json.Marshal(jsonData{
-			Version: storage.LatestVersion,
-			Data:    *sd,
-		})
-		return data, err
-	case TDataSession:
-		storage.Load(fileName, false)
-		accounts, err := tdesktop.Read(s.name, nil)
-		if err != nil {
-			return nil, err
-		}
-		if len(accounts) == 0 {
-			return nil, fmt.Errorf("no accounts found")
-		}
-		auth := accounts[0]
-		sd, err := session.TDesktopSession(auth)
 		if err != nil {
 			return nil, err
 		}
@@ -143,33 +115,35 @@ func (s *SessionName) load() ([]byte, error) {
 		return data, err
 
 	case StringSession:
-		storage.Load(fileName, false)
-		sd, err := functions.DecodeStringToSession(s.name)
+		storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		sd, err := functions.DecodeStringToSession(s.Name)
 		if err != nil {
 			return nil, err
 		}
-
-		// data, err := json.Marshal(jsonData{
-		// 	Version: latestVersion,
-		// 	Data:    *sd,
-		// })
 		return sd.Data, err
+
 	default:
-		if s.name == "" {
-			s.name = "new"
+		if s.Name == "" {
+			s.Name = "new"
 		}
-		storage.Load(fileName, false)
+		storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
 		sFD := storage.GetSession()
 		return sFD.Data, nil
 	}
 }
 
-// GetName is used for retrieving name of the session.
-func (s *SessionName) GetName() string {
-	return s.name
-}
+// OptimizeAndSaveSessionData optimizes session data and saves it to a file.
+func (s *SessionName) OptimizeAndSaveSessionData() error {
+	optData, err := s.OptimizeSessionData()
+	if err != nil {
+		return err
+	}
 
-// GetData is used for retrieving session data through provided SessionName type.
-func (s *SessionName) GetData() ([]byte, error) {
-	return s.data, s.err
+	fileName := filepath.Join(s.Path, s.FileName+".session")
+	err = os.WriteFile(fileName, optData, 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

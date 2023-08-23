@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jaskaur18/gotgproto/generator/parser"
+	"github.com/yaroslavvasilenko/gotgproto/generator/parser"
 )
 
 var helperFuncsCUTempl = template.Must(template.New("cuHelpers").Parse(helperFuncsCU))
@@ -108,9 +108,9 @@ const predefinedCU = `
 package generic
 
 import (
-	"github.com/jaskaur18/gotgproto/ext"
-	"github.com/jaskaur18/gotgproto/types"
-	"github.com/jaskaur18/gotgproto/storage"
+	"github.com/yaroslavvasilenko/gotgproto/ext"
+	"github.com/yaroslavvasilenko/gotgproto/types"
+	"github.com/yaroslavvasilenko/gotgproto/storage"
 	"github.com/gotd/td/tg"
 )
 

@@ -1,6 +1,6 @@
 package filters
 
-import "github.com/jaskaur18/gotgproto/ext"
+import "github.com/yaroslavvasilenko/gotgproto/ext"
 
 type chatMemberUpdated struct{}
 

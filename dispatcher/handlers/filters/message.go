@@ -4,8 +4,8 @@ import (
 	"regexp"
 
 	"github.com/gotd/td/tg"
-	"github.com/jaskaur18/gotgproto/functions"
-	"github.com/jaskaur18/gotgproto/types"
+	"github.com/yaroslavvasilenko/gotgproto/functions"
+	"github.com/yaroslavvasilenko/gotgproto/types"
 )
 
 type messageFilters struct{}

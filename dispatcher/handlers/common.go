@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/yaroslavvasilenko/gotgproto/ext"
 )
 
 // CallbackResponse is the function which will be called on a handler's execution.

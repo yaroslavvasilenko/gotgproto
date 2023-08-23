@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/jaskaur18/gotgproto/dispatcher/handlers/filters"
-	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/yaroslavvasilenko/gotgproto/dispatcher/handlers/filters"
+	"github.com/yaroslavvasilenko/gotgproto/ext"
 )
 
 // ChatMemberUpdated handler is executed on all type of incoming updates.

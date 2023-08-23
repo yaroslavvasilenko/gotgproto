@@ -7,8 +7,8 @@ import (
 
 	"github.com/gotd/td/session"
 	"github.com/gotd/td/session/tdesktop"
-	"github.com/jaskaur18/gotgproto/functions"
-	"github.com/jaskaur18/gotgproto/storage"
+	"github.com/yaroslavvasilenko/gotgproto/functions"
+	"github.com/yaroslavvasilenko/gotgproto/storage"
 )
 
 // SessionName object consists of name and SessionType.

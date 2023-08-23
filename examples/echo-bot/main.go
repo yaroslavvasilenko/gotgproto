@@ -5,12 +5,12 @@ import (
 	"log"
 
 	"github.com/gotd/td/tg"
-	"github.com/jaskaur18/gotgproto"
-	"github.com/jaskaur18/gotgproto/dispatcher"
-	"github.com/jaskaur18/gotgproto/dispatcher/handlers"
-	"github.com/jaskaur18/gotgproto/dispatcher/handlers/filters"
-	"github.com/jaskaur18/gotgproto/ext"
-	"github.com/jaskaur18/gotgproto/sessionMaker"
+	"github.com/yaroslavvasilenko/gotgproto"
+	"github.com/yaroslavvasilenko/gotgproto/dispatcher"
+	"github.com/yaroslavvasilenko/gotgproto/dispatcher/handlers"
+	"github.com/yaroslavvasilenko/gotgproto/dispatcher/handlers/filters"
+	"github.com/yaroslavvasilenko/gotgproto/ext"
+	"github.com/yaroslavvasilenko/gotgproto/sessionMaker"
 )
 
 func main() {

@@ -7,8 +7,8 @@ import (
 
 	"github.com/gotd/td/telegram/message"
 	"github.com/gotd/td/tg"
-	"github.com/jaskaur18/gotgproto/storage"
-	"github.com/jaskaur18/gotgproto/types"
+	"github.com/yaroslavvasilenko/gotgproto/storage"
+	"github.com/yaroslavvasilenko/gotgproto/types"
 )
 
 // Update contains all the data related to an update.

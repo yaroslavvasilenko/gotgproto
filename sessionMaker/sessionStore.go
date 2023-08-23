@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-faster/errors"
 	"github.com/gotd/td/session"
-	"github.com/jaskaur18/gotgproto/storage"
+	"github.com/yaroslavvasilenko/gotgproto/storage"
 )
 
 // SessionStorage implements SessionStorage for file system as file

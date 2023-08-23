@@ -2,8 +2,8 @@ package filters
 
 import (
 	"github.com/gotd/td/tg"
-	"github.com/jaskaur18/gotgproto/ext"
-	"github.com/jaskaur18/gotgproto/types"
+	"github.com/yaroslavvasilenko/gotgproto/ext"
+	"github.com/yaroslavvasilenko/gotgproto/types"
 )
 
 var (

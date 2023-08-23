@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/gotd/td/tg"
-	"github.com/jaskaur18/gotgproto/storage"
+	"github.com/yaroslavvasilenko/gotgproto/storage"
 )
 
 func AddChatMembers(context context.Context, client *tg.Client, chatPeer tg.InputPeerClass, users []tg.InputUserClass, forwardLimit int) (bool, error) {

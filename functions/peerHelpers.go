@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/gotd/td/tg"
-	"github.com/jaskaur18/gotgproto/storage"
+	"github.com/yaroslavvasilenko/gotgproto/storage"
 )
 
 // GetChatIdFromPeer returns the chat/user id from the provided tg.PeerClass.

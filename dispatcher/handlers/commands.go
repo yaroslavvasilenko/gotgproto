@@ -3,8 +3,8 @@ package handlers
 import (
 	"strings"
 
-	"github.com/jaskaur18/gotgproto/dispatcher/handlers/filters"
-	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/yaroslavvasilenko/gotgproto/dispatcher/handlers/filters"
+	"github.com/yaroslavvasilenko/gotgproto/ext"
 )
 
 // Command handler is executed when the update consists of tg.Message provided it is a command and satisfies all the conditions.

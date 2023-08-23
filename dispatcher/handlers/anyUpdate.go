@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/jaskaur18/gotgproto/ext"
+	"github.com/yaroslavvasilenko/gotgproto/ext"
 )
 
 // AnyUpdate handler is executed on all type of incoming updates.

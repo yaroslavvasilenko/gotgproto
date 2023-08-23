@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"log"
+	"os"
 	"time"
 
 	"github.com/AnimeKaizoku/cacher"
@@ -12,17 +12,27 @@ import (
 
 var SESSION *gorm.DB
 
-func Load(sessionName string, inMemory bool) {
+func Load(sessionName string, inMemory bool) error {
 	loadCache(inMemory)
 	if inMemory {
-		return
+		return nil
 	}
+
+	// Create a new file if it doesn't exist
+	if _, err := os.Stat(sessionName); os.IsNotExist(err) {
+		file, createErr := os.Create(sessionName)
+		if createErr != nil {
+			return createErr
+		}
+		defer file.Close()
+	}
+
 	db, err := gorm.Open(sqlite.Open(sessionName), &gorm.Config{
 		SkipDefaultTransaction: true,
 		Logger:                 logger.Default.LogMode(logger.Silent),
 	})
 	if err != nil {
-		log.Panicln(err)
+		return err
 	}
 	SESSION = db
 	dB, _ := db.DB()
@@ -30,7 +40,7 @@ func Load(sessionName string, inMemory bool) {
 
 	// Create tables if they don't exist
 	_ = SESSION.AutoMigrate(&Session{}, &Peer{})
-
+	return nil
 }
 
 func loadCache(inMemory bool) {

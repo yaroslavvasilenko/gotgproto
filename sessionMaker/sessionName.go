@@ -3,7 +3,6 @@ package sessionMaker
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 	"path/filepath"
 
 	"github.com/gotd/td/session"
@@ -83,12 +82,16 @@ func (s *SessionName) GetData() ([]byte, error) {
 
 // OptimizeSessionData optimizes session data based on the session type.
 func (s *SessionName) OptimizeSessionData() ([]byte, error) {
+	var err error
+
 	switch s.SessionType {
 	case PyrogramSession, TelethonSession, TDataSession:
-		storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		err = storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		if err != nil {
+			return nil, err
+		}
 
 		var sd *session.Data
-		var err error
 
 		switch s.SessionType {
 		case PyrogramSession:
@@ -115,7 +118,10 @@ func (s *SessionName) OptimizeSessionData() ([]byte, error) {
 		return data, err
 
 	case StringSession:
-		storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		err = storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		if err != nil {
+			return nil, err
+		}
 		sd, err := functions.DecodeStringToSession(s.Name)
 		if err != nil {
 			return nil, err
@@ -124,26 +130,13 @@ func (s *SessionName) OptimizeSessionData() ([]byte, error) {
 
 	default:
 		if s.Name == "" {
-			s.Name = "new"
+			s.Name = "new_session"
 		}
-		storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		err = storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		if err != nil {
+			return nil, err
+		}
 		sFD := storage.GetSession()
 		return sFD.Data, nil
 	}
-}
-
-// OptimizeAndSaveSessionData optimizes session data and saves it to a file.
-func (s *SessionName) OptimizeAndSaveSessionData() error {
-	optData, err := s.OptimizeSessionData()
-	if err != nil {
-		return err
-	}
-
-	fileName := filepath.Join(s.Path, s.FileName+".session")
-	err = os.WriteFile(fileName, optData, 0644)
-	if err != nil {
-		return err
-	}
-
-	return nil
 }

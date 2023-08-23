@@ -132,7 +132,7 @@ func (s *SessionName) OptimizeSessionData() ([]byte, error) {
 		if s.Name == "" {
 			s.Name = "new_session"
 		}
-		err = storage.Load(filepath.Join(s.Path, s.FileName+".session"), false)
+		err = storage.Load(s.Path+s.FileName+".session", false)
 		if err != nil {
 			return nil, err
 		}

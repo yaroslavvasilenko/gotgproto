@@ -3,6 +3,8 @@ package sessionMaker
 import (
 	"encoding/json"
 	"fmt"
+	"log/slog"
+	"os"
 
 	"github.com/gotd/td/session"
 	"github.com/gotd/td/session/tdesktop"
@@ -71,8 +73,29 @@ func NewSession(sessionName string, sessionType SessionType, newSessionOpts ...N
 }
 
 func (s *SessionName) load() ([]byte, error) {
+	defer func() {
+		if r := recover(); r != nil {
+			slog.Info("failed to load session", r)
+			s.err = fmt.Errorf("failed to load session: %v", r)
+		}
+	}()
 
 	fileName := fmt.Sprintf("%s/%s.session", s.path, s.fileName)
+
+	// Check if the file exists
+	_, err := os.Stat(fileName)
+	if err != nil {
+		if os.IsNotExist(err) {
+			// Create an empty file if it doesn't exist
+			file, createErr := os.Create(fileName)
+			if createErr != nil {
+				return nil, createErr
+			}
+			defer file.Close() // Close the file when done
+		} else {
+			return nil, err
+		}
+	}
 
 	switch s.sessionType {
 	case PyrogramSession:
